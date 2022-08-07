@@ -1,7 +1,7 @@
 
 
 STORE = [
-    { question: "What are the three primary colors?",
+    { question: "Testing fork. What are the three primary colors?",
     answer: ["red, yellow, blue", "red, orange, blue", "green, orange, purple", "orange, blue, green" ],
     correctAnswer:"red, yellow, blue"
     },

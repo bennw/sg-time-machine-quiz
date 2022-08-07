@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" description = "Color Theory Quiz">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Color Theory Quiz</title>
-    <link rel="stylesheet" type="text/css" href="main.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" description="Color Theory Quiz">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Color Theory Quiz</title>
+	<link rel="stylesheet" type="text/css" href="main.css"/>
+	<link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
 </head>
 <body>
-    <header class="header">
-            <h1>Color Theory Quiz</h1>
-            <ul>
-                <li >Question Number: <span id="question-number">0</span>/5</li>
-                <li id="current-score">Score: <span id="score">0/5 </span></li>
-            </ul>
-    </header>
-    <main>
-        <section class="js-quiz">
-            <section class ="start-quiz">
-                <h2>How Well Do You Know Your Colors?</h2>
-                <img src="img/paint-rollers.jpg" alt="paint rollers making paint streaks" id="paint-rollers"/>
-                <button type="button" id ="button-start">Start Quiz</button>
-            </section>
-            <section class ="js-answer"></section>
-            <section class="js-results"></section>
-        </section>
-    </main>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="index.js"></script>
+	<header class="header">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<h1>Color Theory Quiz</h1>
+			<ul>
+				<li >Question Number: <span id="question-number">0</span>/5</li>
+				<li id="current-score">Score: <span id="score">0/5 </span></li>
+			</ul>
+	<script src="js/ion.rangeSlider.min.js"></script>
+	</header>
+	<main>
+		<section class="js-quiz">
+			<section class ="start-quiz">
+				<h2>In which year did these events take place?</h2>
+				<h3>Guesstimate using the slider!</h3>
+				<!--<img src="img/paint-rollers.jpg" alt="paint rollers making paint streaks" id="paint-rollers"/>-->
+				<button type="button" id ="button-start">Start Quiz</button>
+			</section>
+			<section class="js-answer"></section>
+			<section class="js-results"></section>
+			<script src="js/ion.rangeSlider.min.js"></script>
+		</section>
+	</main>
+		<script src="js/ion.rangeSlider.min.js"></script>
+		<script src="index.js"></script>
 </body>
 </html>

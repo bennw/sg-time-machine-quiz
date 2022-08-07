@@ -87,6 +87,13 @@ input:hover, label:hover {
 .js-quiz-form ul button {
 width: 40%;    
 }
+.js-answer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
 
 .start-quiz, .js-quiz .js-answer, .js-results {
     display: flex;
@@ -140,4 +147,16 @@ width: 40%;
         padding: 0;
     }
 
+}
+
+.showcase__mark {
+	display: block;
+	position: absolute;
+	top: 55px;
+	background: #2a5;
+	transform: rotate(-0deg);
+	padding: 1px 3px;
+	border-radius: 4px;
+	color: #fff;
+	margin-left: -10px;
 }

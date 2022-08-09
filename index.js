@@ -46,41 +46,41 @@ function generateQuizQuestion()
 		let question = $(`
 		<form class="js-quiz-form">
 		<legend class="question">${STORE[qNumber].question}</legend>
-		<br>
-		<div class="radiogroup"></div>
 		</form>
 		`);
 		// <ul class="radiogroup" role="radiogroup" aria-labelledby="question"></ul>
 		let answersSlider = $(`
-		<div class="slider_selection"><input id="slider" autofocus/></div>
+			<div id="slider" /><br><br>
 		`);
 		let button = $(`<button type="button" id="button-submit">Submit</button>`);
-		let sliderScript = $(`
-		<script>
-		$("#slider").ionRangeSlider({
-			skin: "big",
-			min: ${sliderMin},
-			max: ${sliderMax},
-			from: ${sliderMax},
-			grid: true,
-			prettify_enabled: false,
-			onStart: function (data) {
-				// fired then range slider is ready
-			},
-			onChange: function (data) {
-				// fired on every range slider update
-				yearSelected = data.from;
-			},
-			onFinish: function (data) {
-				// fired on pointer release
-			},
-			onUpdate: function (data) {
-				// fired on changing slider with Update method
-			}
-		});</script>`);
-		$('.js-quiz').append(question);
-		$('.radiogroup').append(answersSlider, button);
-		$('.js-quiz').append(sliderScript);
+		let sliderScript2 = $(`<script>
+			var slider = document.getElementById('slider');
+			noUiSlider.create(slider, {
+				start: [${sliderMax}],
+				connect: true,
+				behaviour: 'smooth-steps',
+				step: 1,
+				range: {
+					'min': [${sliderMin}],
+					'max': [${sliderMax}],
+				},
+				pips: {
+					mode: 'count',
+					values: 5,
+					density: 5,
+				},
+				tooltips: [
+					wNumb({decimals: 0}), // tooltip with custom formatting
+				],
+			});
+			slider.noUiSlider.on('update', function () {
+				yearSelected = slider.noUiSlider.get();
+			});
+		</script>`);
+		$('.sectiontext').append(question, button);
+		$('#divslider1').append(answersSlider);
+		//$('#divslider1').append(button);
+		$('#divslider1').append(sliderScript2);
 		yearSelected = 2022;
 		questionNumber();
 	} 
@@ -108,50 +108,57 @@ function questionNumber(){
 function addScore(n){
 	score += n;
 	$('header').find('#score').text(`${score}`);
-
 }
 
 /* displays the page for when the answer is right, updates score accordingly */
 function rightAnswer() {
 	let ans = STORE[qNumber].answer;
 	console.log(`rightAnswer ran, ${yearSelected} -> ${STORE[qNumber].correctYear}`);
-	let sliderScript = $(`
-	<script>
-	$("#slider").ionRangeSlider({
-		skin: "big",
-		min: ${sliderMin},
-		max: ${sliderMax},
-		from: ${yearSelected},
-		grid: true,
-		prettify_enabled: false,
-		from_min: ${yearSelected},
-		from_max: ${yearSelected},
-		onStart: function (data) {
-			// fired then range slider is ready
-            addMarks(data.slider);
-		},
-		onChange: function (data) {
-			// fired on every range slider update
-			yearSelected = data.from;
-		},
-		onFinish: function (data) {
-			// fired on pointer release
-		},
-		onUpdate: function (data) {
-			// fired on changing slider with Update method
-		}
-	});</script>`);
+	let answersSlider = $(`
+		<div id="sliderAns" /><br><br>
+	`);
+	let textAns = $(`<form class="js-quiz-form"><h2>${ans}</h2>
+		<button type="button" id="button-next">Next Question</button></form>`);
+	let sliderScript2 = $(`<script>
+		var slider = document.getElementById('sliderAns');
+		noUiSlider.create(slider, {
+			start: [${yearSelected}, ${sliderMax}],
+			behaviour: 'unconstrained-tap',
+			connect: true,
+			step: 1,
+			range: {
+				'min': [${sliderMin}],
+				'max': [${sliderMax}],
+			},
+			pips: {
+				mode: 'count',
+				values: 5,
+				density: 5,
+			},
+			tooltips: [
+				wNumb({decimals: 0}), // tooltip with custom formatting
+				false,
+			],
+			animationDuration: 1600,
+		});
+		$( document ).ready(function() {
+			slider.noUiSlider.set([null, ${STORE[qNumber].correctYear}]);    setTimeout(function() { 
+				$('.js-answer').show();
+			}, 1600);
+		});
+	</script>`);
 	$('.js-quiz-form').hide();
-	$('.js-answer').append(`<form class="js-quiz-form"><h2>${ans}</h2>
-	<div class="slider_selection"><input id="slider" /></div>
-	<button type="button" id="button-next">Next Question</button></form>`).show();
-	$('.js-answer').append(sliderScript);
+	$('.js-answer').append(textAns);
+	$('#divslider1').empty();
+	$('#divslider1').append(answersSlider);
+	$('#divslider1').append(sliderScript2);
 	// <img src="img/right-answer.jpg" alt="abstract painting" id="right-answer"/>
 }
 
 function convertToPercent(num) {
 	return (num - sliderMin) / (sliderMax - sliderMin) * 100;
 }
+
 function addMarks($slider) {
 	var html = '';
 	var left = 0;
@@ -175,7 +182,7 @@ function wrongAnswer() {
 		<img src="img/wrong-answer.jpg" alt="child with paint all over face" id="wrong-answer"/>
 		<h3>The correct answer is:</h3>
 		<p><span class="correct-answer">${STORE[qNumber].correctAnswer}</span></p>
-		<button type="button" id ="button-next">Next</button>`).show();
+		<button type="button" id="button-next">Next</button>`).show();
 }
 
 /* event listener for the next question button, calls the generateQuizQuestion function to display the next question */

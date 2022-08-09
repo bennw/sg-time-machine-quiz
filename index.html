@@ -6,23 +6,26 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Color Theory Quiz</title>
 	<link rel="stylesheet" type="text/css" href="main.css"/>
-	<link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.min.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
 </head>
 <body>
 	<header class="header">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-			<h1>Color Theory Quiz</h1>
+			<h1>SG Time Machine Quiz</h1>
 			<ul>
 				<li >Question Number: <span id="question-number">0</span>/5</li>
 				<li id="current-score">Score: <span id="score">0/5 </span></li>
 			</ul>
-	<script src="js/ion.rangeSlider.min.js"></script>
 	</header>
-	<main>
-		<section class="js-quiz">
-			<section class ="start-quiz">
+	<main><div class="divbody">
+		<section class="sectionslider">
+			<div class="divslider" id="divslider1"></div>
+			<div class="divslider" id="divslider2"></div>
+		</section>
+		<br><br>
+		<section class="sectiontext">
+			<section class="start-quiz">
 				<h2>In which year did these events take place?</h2>
 				<h3>Guesstimate using the slider!</h3>
 				<!--<img src="img/paint-rollers.jpg" alt="paint rollers making paint streaks" id="paint-rollers"/>-->
@@ -30,10 +33,11 @@
 			</section>
 			<section class="js-answer"></section>
 			<section class="js-results"></section>
-			<script src="js/ion.rangeSlider.min.js"></script>
 		</section>
-	</main>
-		<script src="js/ion.rangeSlider.min.js"></script>
+	</div></main>
+		<script src="js/wNumb.min.js"></script>
+		<link href="js/nouislider.css" rel="stylesheet">
+		<script src="js/nouislider.js"></script>
 		<script src="index.js"></script>
 </body>
 </html>

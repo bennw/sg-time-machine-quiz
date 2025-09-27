@@ -4,13 +4,13 @@ const images = [
   { file: "img00.png", year: 2024, desc: "Open bus parade after Max Maeder won bronze for the men's kitefoiling event during the Paris Olympics in 2024." },
   { file: "img01.png", year: 2004, desc: "Taufik Batisah wins the inaugural edition of Singapore Idol." },
   { file: "img02.png", year: 2002, desc: "Fireworks light up Marina Bay to celebrate the opening of Singapore's first purpose-built performing arts centre, the Esplanade." },
-  { file: "img03.png", year: 2024, desc: "Ding Liren vs. Gukesh Dommaraju during the World Chess Championship 2024 held in Singapore." }
+  { file: "img03.png", year: 2024, desc: "Ding Liren vs. Gukesh Dommaraju during the World Chess Championship 2024 held in Singapore." },
   { file: "img04.png", year: 2008, desc: "Wanted notices for Mas Selamat, who escaped from detention. This incident was described by some as the largest manhunt ever launched in Singapore." },
   { file: "img05.png", year: 2020, desc: "Demolition of Merlion statue in Sentosa. The Merlion was closed off in 2019; demolition works resumed after COVID lockdown restrictions in 2020." },
   { file: "img06.png", year: 2013, desc: "Aftermath of the Little India riot, the second riot in Singapore since independence." },
   { file: "img07.png", year: 2018, desc: "Trump-Kim summit, the first meeting ever between a sitting US president and a North Korean leader." },
   { file: "img08.png", year: 2000, desc: "Wedding design Hello Kitty toy promotion launched by McDonalds, leading to a queueing frenzy islandwide." },
-  { file: "img09.png", year: 2016, desc: "State funeral for S. R. Nathan, the longest serving president in Singapore's history." },
+  { file: "img09.png", year: 2016, desc: "State funeral for S. R. Nathan, the longest serving president in Singapore's history." }
 ];
 
 // https://www.firstpost.com/sports/gukesh-vs-ding-liren-game-11-live-updates-score-world-chess-championship-2024-8-december-singapore-13842723.html

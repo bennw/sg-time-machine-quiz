@@ -74,7 +74,7 @@ function submitGuess() {
 
   totalScore += points;
   results.push({
-    descx: img.descx,
+    desc: img.desc,
     guess: guess,
     answer: img.year,
     points: points
@@ -87,7 +87,7 @@ function submitGuess() {
   app.innerHTML = `
     <h2>Result</h2>
     <img src="images/${img.file}" alt="Result Image">
-    <p>${img.desc}</p>
+    <p>${img.descx}</p>
     <div class="result-row">
       <div><strong>Your guess:</strong> ${guess}</div>
       <div><strong>Correct:</strong> ${img.year}</div>
@@ -112,7 +112,7 @@ function showFinalResults() {
     const color = `hsl(${hue}, 80%, 40%)`;
     return `
       <tr>
-        <td>${r.descx}</td>
+        <td>${r.desc}</td>
         <td>${r.guess}</td>
         <td>${r.answer}</td>
         <td><span style="color:${color}">${r.points}</span></td>

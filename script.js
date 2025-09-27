@@ -80,6 +80,10 @@ function submitGuess() {
     points: points
   });
 
+  // color interpolation (0 → red, 5000 → green)
+  const hue = (points / 5000) * 120; 
+  const color = `hsl(${hue}, 80%, 40%)`;
+
   app.innerHTML = `
     <h2>Result</h2>
     <img src="images/${img.file}" alt="Result Image">
@@ -87,7 +91,7 @@ function submitGuess() {
     <div class="result-row">
       <div><strong>Your guess:</strong> ${guess}</div>
       <div><strong>Correct:</strong> ${img.year}</div>
-      <div><strong>Points:</strong> ${points}</div>
+      <div><strong>Points:</strong> <span style="color:${color}">${points}</span></div>
     </div>
     <button onclick="nextImage()">Next</button>
   `;
@@ -103,14 +107,18 @@ function nextImage() {
 }
 
 function showFinalResults() {
-  let tableRows = results.map(r => `
-    <tr>
-      <td>${r.desc}</td>
-      <td>${r.guess}</td>
-      <td>${r.answer}</td>
-      <td>${r.points}</td>
-    </tr>
-  `).join("");
+  let tableRows = results.map(r => {
+    const hue = (r.points / 5000) * 120; // 0=red, 5000=green
+    const color = `hsl(${hue}, 80%, 40%)`;
+    return `
+      <tr>
+        <td>${r.descx}</td>
+        <td>${r.guess}</td>
+        <td>${r.answer}</td>
+        <td><span style="color:${color}">${r.points}</span></td>
+      </tr>
+    `;
+  }).join("");
   app.innerHTML = `
     <h2>Summary</h2>
     <table border="1" cellpadding="8" cellspacing="0" style="margin: 0 auto; border-collapse: collapse;">

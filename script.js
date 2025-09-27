@@ -1,16 +1,16 @@
 const app = document.getElementById("app");
 
 const images = [
-  { file: "img00.png", year: 2024, desc: "Open bus parade after Max Maeder won bronze for the men's kitefoiling event during the Paris Olympics in 2024." },
-  { file: "img01.png", year: 2004, desc: "Taufik Batisah wins the inaugural edition of Singapore Idol." },
-  { file: "img02.png", year: 2002, desc: "Fireworks light up Marina Bay to celebrate the opening of Singapore's first purpose-built performing arts centre, the Esplanade." },
-  { file: "img03.png", year: 2024, desc: "Ding Liren vs. Gukesh Dommaraju during the World Chess Championship 2024 held in Singapore." },
-  { file: "img04.png", year: 2008, desc: "Wanted notices for Mas Selamat, who escaped from detention. This incident was described by some as the largest manhunt ever launched in Singapore." },
-  { file: "img05.png", year: 2020, desc: "Demolition of Merlion statue in Sentosa. The Merlion was closed off in 2019; demolition works resumed after COVID lockdown restrictions in 2020." },
-  { file: "img06.png", year: 2013, desc: "Aftermath of the Little India riot, the second riot in Singapore since independence." },
-  { file: "img07.png", year: 2018, desc: "Trump-Kim summit, the first meeting ever between a sitting US president and a North Korean leader." },
-  { file: "img08.png", year: 2000, desc: "Wedding design Hello Kitty toy promotion launched by McDonalds, leading to a queueing frenzy islandwide." },
-  { file: "img09.png", year: 2016, desc: "State funeral for S. R. Nathan, the longest serving president in Singapore's history." }
+  { file: "img00.png", year: 2024, desc: "Max Maeder", 	descx: "Open bus parade after Max Maeder won bronze for the men's kitefoiling event during the Paris Olympics in 2024." },
+  { file: "img01.png", year: 2004, desc: "Taufik Batisah", descx: "Taufik Batisah wins the inaugural edition of Singapore Idol." },
+  { file: "img02.png", year: 2002, desc: "Esplanade", 	descx: "Fireworks light up Marina Bay to celebrate the opening of Singapore's first purpose-built performing arts centre, the Esplanade." },
+  { file: "img03.png", year: 2024, desc: "Chess", 		descx: "Ding Liren vs. Gukesh Dommaraju during the World Chess Championship 2024 held in Singapore." },
+  { file: "img04.png", year: 2008, desc: "Mas Selamat", descx: "Wanted notices for Mas Selamat, who escaped from detention. This incident was described by some as the largest manhunt ever launched in Singapore." },
+  { file: "img05.png", year: 2020, desc: "Merlion", 	descx: "Demolition of Merlion statue in Sentosa. The Merlion was closed off in 2019; demolition works resumed after COVID lockdown restrictions in 2020." },
+  { file: "img06.png", year: 2013, desc: "Little India",descx: "Aftermath of the Little India riot, the second riot in Singapore since independence." },
+  { file: "img07.png", year: 2018, desc: "Trump-Kim", 	descx: "Trump-Kim summit, the first meeting ever between a sitting US president and a North Korean leader." },
+  { file: "img08.png", year: 2000, desc: "Hello Kitty", descx: "Wedding design Hello Kitty toy promotion launched by McDonalds, leading to a queueing frenzy islandwide." },
+  { file: "img09.png", year: 2016, desc: "S. R. Nathan",descx: "State funeral for S. R. Nathan, the longest serving president in Singapore's history." }
 ];
 
 // https://www.firstpost.com/sports/gukesh-vs-ding-liren-game-11-live-updates-score-world-chess-championship-2024-8-december-singapore-13842723.html
@@ -25,6 +25,7 @@ const images = [
 
 let currentIndex = 0;
 let totalScore = 0;
+let results = []; // store each round result
 
 function showTitleScreen() {
   app.innerHTML = `
@@ -36,6 +37,7 @@ function showTitleScreen() {
 function startGame() {
   currentIndex = 0;
   totalScore = 0;
+  results = [];
   showGuessScreen();
 }
 
@@ -44,7 +46,7 @@ function showGuessScreen() {
   app.innerHTML = `
     <h2>Image ${currentIndex + 1} of ${images.length}</h2>
     <img src="images/${img.file}" alt="Guess Image">
-    <div id="year-display">Year: 2015</div>
+    <div id="year-display">Year: 2012</div>
     <input type="range" min="2000" max="2025" value="2012" id="year-slider">
     <br><br><br>
     <button onclick="submitGuess()">Submit</button>
@@ -71,14 +73,22 @@ function submitGuess() {
   else if (diff === 4) points = 1000;
 
   totalScore += points;
+  results.push({
+    descx: img.descx,
+    guess: guess,
+    answer: img.year,
+    points: points
+  });
 
   app.innerHTML = `
     <h2>Result</h2>
     <img src="images/${img.file}" alt="Result Image">
     <p>${img.desc}</p>
-    <p>You guessed: <strong>${guess}</strong></p>
-    <p>Correct year: <strong>${img.year}</strong></p>
-    <p>Points earned: <strong>${points}</strong></p>
+    <div class="result-row">
+      <div><strong>Your guess:</strong> ${guess}</div>
+      <div><strong>Correct:</strong> ${img.year}</div>
+      <div><strong>Points:</strong> ${points}</div>
+    </div>
     <button onclick="nextImage()">Next</button>
   `;
 }
@@ -93,8 +103,29 @@ function nextImage() {
 }
 
 function showFinalResults() {
+  let tableRows = results.map(r => `
+    <tr>
+      <td>${r.desc}</td>
+      <td>${r.guess}</td>
+      <td>${r.answer}</td>
+      <td>${r.points}</td>
+    </tr>
+  `).join("");
   app.innerHTML = `
-    <h2>Game Over</h2>
+    <h2>Summary</h2>
+    <table border="1" cellpadding="8" cellspacing="0" style="margin: 0 auto; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Desc</th>
+          <th>Guess</th>
+          <th>Answer</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRows}
+      </tbody>
+    </table>
     <p class="score">Total Score: <strong>${totalScore}</strong></p>
     <button onclick="showTitleScreen()">Play Again</button>
   `;
